@@ -18,7 +18,7 @@ const SideBar: React.FC<Props> = ({ selectedTab, onClick }) => {
         <div className="flex w-3/4 items-start pb-2">Switch between tabs</div>
         <Select className="w-3/4  ">
           <MenuItem>    <div
-      className="flex justify-center items-center w-3/4 h-[58.53px] cursor-pointer"
+      className="flex justify-center items-center  cursor-pointer"
       onClick={() => {
         onClick('Cohorts');
       }}

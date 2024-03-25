@@ -22,7 +22,7 @@ const EmptySpace: React.FC<EmptySpaceProps> = ({
   handleClose,
 }) => {
   return (
-    <div className="pt-10 w-[350px] pl-10 border md:mt-5 md:ml-[250px]  flex flex-col justify-center items-center h-64 md:w-96 gap-5">
+    <div className="pt-[200px] md:pt-10 w-[350px] pl-10 md:mt-5 md:ml-[250px]  flex flex-col justify-center items-center h-64 md:w-96 gap-5">
       <div className="h-48 w-96 flex flex-col justify-center items-center gap-10">
         <Picture url={"/Group 598.png"} style={EmptySpaceStyle} />
         <div className="font-bold">Empty Space</div>

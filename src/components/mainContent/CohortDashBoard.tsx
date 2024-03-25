@@ -22,13 +22,14 @@ import EmptySpace from "../emptySpace/EmptySpace";
 
 
 const CohortDashBoard = ({ handleOpen, clicked, handleClose }) => {
-  // const cohortData = useSelector(
-  //   (state: RootState) => state.cohortData.cohortData
-  // );
- const [cohortData,setCohortData] = useState([]);
+  const cohortData = useSelector(
+    (state: RootState) => state.cohortData.cohortData
+  );
+//  const [cohortData,setCohortData] = useState([]);
 //  const dispatch = useDispatch<AppDispatch>();
  
 
+const dataExists = typeof cohortData === 'object' && Object.values(cohortData).some(value => value !== null && value !== "");
 
  useEffect( ()=>{
   const fetchCohort = async ()=>{
@@ -48,9 +49,9 @@ const CohortDashBoard = ({ handleOpen, clicked, handleClose }) => {
   return (
     <>
    {cohortData && cohortData.length > 0 ? (
-    <div className="md:w-full md:text-blue w-[20%]">
-      <div className="flex flex-row mt-5  justify-between w w-[100%]">
-        <div className="flex w-[400px] h-[44px] border  border-solid border-grey-100 gap-2 rounded-[7px] justify-start items-center pl-2 ">
+    <div className="w-[300px] md:w-full md:text-blue border ">
+      <div className="flex pt-5 gap-5 flex-col-reverse md:flex md:flex-row mt-5  md:justify-between  w-[100%]">
+        <div className="flex md:w-[400px] h-[44px] border  border-solid border-grey-100 gap-2 rounded-[7px] justify-start items-center pl-2 ">
           <LuSearch color={"#D0DCE4"} />
           <CustomInput placeHolder={"Search"} style={{ width: '360px' }} 
           type={undefined} icon={undefined} value={undefined} 
@@ -62,20 +63,18 @@ const CohortDashBoard = ({ handleOpen, clicked, handleClose }) => {
 
         <div className="flex flex-row  gap-4">
           <CustomButton
-            icons={[]}
-            text={"Create a Cohort"}
-            style={createCohortStyles}
-            onClick={handleOpen}
-          />
+                icons={[]}
+                text={"Create a Cohort"}
+                style={createCohortStyles}
+                onClick={handleOpen} isDisabled={false}          />
           <CustomButton
-            icons={[<HiOutlineDotsVertical />]}
-            text={"More Actions"}
-            style={MoreActionButtonStyles}
-          />
+                icons={[<HiOutlineDotsVertical />]}
+                text={"More Actions"}
+                style={MoreActionButtonStyles} isDisabled={false}          />
         </div>
       </div>
 
-      <div className="flex flex-col mt-8 overflow-x-hidden w-[1025px] h-[250px] ">
+      <div className="flex flex-col mt-8 overflow-x-hidden w-3/4 md:w-[1025px] h-[250px] ">
         
           <div>
             {cohortData.map((item, index) => (

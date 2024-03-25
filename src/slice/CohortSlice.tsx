@@ -25,10 +25,10 @@ const CohortSlice = createSlice({
   name: "cohortData",
   initialState,
   reducers: {
-    // createCohort: (state: { cohortData: any; }, action: { payload: any; }) => {
-    //   state.cohortData.push(action.payload);
-    //   console.log(action.payload)
-    // }
+    createCohort: (state: { cohortData: any; }, action: { payload: any; }) => {
+      state.cohortData.push(action.payload);
+      console.log(action.payload)
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -40,6 +40,6 @@ const CohortSlice = createSlice({
 },
 );
 
-// export const {createCohort} = CohortSlice.actions;
+export const {createCohort} = CohortSlice.actions;
 export default CohortSlice.reducer;
 

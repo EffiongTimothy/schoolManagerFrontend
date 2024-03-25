@@ -12,12 +12,15 @@ import createCohortStyles from "../button/buttonStyles/CreateCohortStyles";
 import CancelButtonStyle from "../button/buttonStyles/cancelButtonStyle";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/Store";
-import { createCohort } from "@/slice/CohortSlice";
 import { CreateCohortApi } from "@/fetchData/CreateCohortApiFetch";
 import { AllProgramsApi } from "@/fetchData/AllPrograms";
 import ProgramSelection from "../programList/ProgramSelection";
 import UploadImage from "../uploadImage/UploadImage";
-import { CreateCohortModalStyle } from "./modalStyle/CreateCohortModalStyle";
+import { CreateCohortModalStyle,SmallScreenModalStyle } from "./modalStyle/CreateCohortModalStyle";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { createCohort } from "@/slice/CohortSlice";
+
 
 interface CohortData {
   cohortName: string;
@@ -41,7 +44,7 @@ const CreateCohortModal: React.FC<{
     description: "",
     startDate: new Date(),
     endDate: new Date(),
-    program: "",
+    program: "API",
     imageUrl: "",
   
   });
@@ -58,7 +61,7 @@ const CreateCohortModal: React.FC<{
   };
 
   
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string | number | Date) => {
       const date = new Date(dateString);
       const day = date.getDate().toString().padStart(2, '0');
       const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
@@ -98,7 +101,8 @@ const CreateCohortModal: React.FC<{
 
   const handleButtonClick = () => {
     
-    dispatch(CreateCohortApi(updatedCohortData));
+    // dispatch(CreateCohort(updatedCohortData));
+    dispatch(createCohort(cohortData));
     closeModal();
     reset();
   };
@@ -139,6 +143,40 @@ const CreateCohortModal: React.FC<{
 
   const validData = Object.values(cohortData).some((value) => value === "");
 
+const CreateCohortModalStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "35%",
+  height: "97%",
+  bgcolor: "background.paper",
+  borderRadius: "10px",
+  boxShadow: 24,
+  p: 4,
+};
+
+ const SmallScreenModalStyle = {
+  position: "absolute",
+  top: "60%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "90%", 
+  height: "60%", 
+  bgcolor: "background.paper",
+  borderRadius: "10px",
+  boxShadow: 24,
+  p: 4,
+};
+
+
+
+ 
+  const theme = useTheme();
+
+
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <div>
       <Modal
@@ -146,7 +184,7 @@ const CreateCohortModal: React.FC<{
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={CreateCohortModalStyle}>
+        <Box sx={isSmallScreen ? SmallScreenModalStyle : CreateCohortModalStyle}>
           <div className="flex flex-row justify-between font-bold text-2xl">
             Create a Cohort
             <CustomButton
